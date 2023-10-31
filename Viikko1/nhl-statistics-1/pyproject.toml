@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "riippuvuuksien-injektointi-1"
+name = "nhl-statistics-1"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
