@@ -19,7 +19,7 @@ def main():
     print("Players from FIN")
 
     for player in players:
-        print(f"{player.name} team {player.team} goals {player.goals} assists {player.assists}")
+        print(f"{player.name:20} {player.team:5} {player.goals:2} + {player.assists:2} = {player.goals+player.assists:3}")
 
 if __name__ == "__main__":
     main()
