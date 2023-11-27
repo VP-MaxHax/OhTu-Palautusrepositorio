@@ -1,0 +1,5 @@
+Retrospektiivin tarkoituksena on käydä läpi päätökseen saatua sprinttiä, siinä todettuja huolenaiheita sekä koettuja onnistumisia. Lopullisena tavoitteena retrospektiivillä on todeta ryhmän jäsenten kokemat esteet ja muut huomiot edelliseen printtiin liittyen käsitellä ja toivottavasti korjata epäkohtia seuraavia sprinttejä ajatellen.
+
+Retrospektiivissä asiat yritetään kiteyttää käyttäen yksinkertaisia 'laatikostoja' johon ryhmän jäsenet voivat liittää huomionsa. Tietyissä malleissa näihin kuuluu esimerkiksi "Start", "Stop", "Continue" "More of", "Less of", "Glad", "Mad" ja "Sad". Näiden avulla on tarkoitus helpottaa huomioiden läpikäymistä, sekä tehdä niistä selkeämpi kokonaisuus.
+
+Retrospektiivejä on tapana tehdä joka sprintin jälkeen ja yleensä yksi retrospektiivi kestää puolesta tunnista kahteen tuntiin. Retrospektiiviä johtaa yleensä scrum master joka vie ryhmän huomiot ja pyynnöt tarvittaessa eteenpäin muille organisaation tahoille. Retrospektiivit on todettu laajalti hyväksi käytännöksi ketterän sovelluskehityksen muiden käytäntöjen ohessa.
