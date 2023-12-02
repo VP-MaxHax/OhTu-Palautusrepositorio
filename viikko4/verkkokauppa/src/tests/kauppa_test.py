@@ -7,6 +7,7 @@ from tuote import Tuote
 from ostoskori import Ostoskori
 from pankki import Pankki
 from kirjanpito import Kirjanpito
+import index
 
 class TestKauppa(unittest.TestCase):
     def test_ostoksen_paaytyttya_pankin_metodia_tilisiirto_kutsutaan(self):

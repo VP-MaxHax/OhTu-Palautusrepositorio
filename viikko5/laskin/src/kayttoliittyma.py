@@ -8,75 +8,101 @@ class Komento(Enum):
     NOLLAUS = 3
     KUMOA = 4
 
-
 class Kayttoliittyma:
     def __init__(self, sovellus, root):
-        self._sovellus = sovellus
-        self._root = root
+        self.sovellus = sovellus
+        self.root = root
+        self.komennot = {
+            Komento.SUMMA: Summa(self.sovellus),
+            Komento.EROTUS: Erotus(self.sovellus),
+            Komento.NOLLAUS: Nollaus(self.sovellus),
+            Komento.KUMOA: Kumoa(self.sovellus)
+        }
 
     def kaynnista(self):
-        self._arvo_var = StringVar()
-        self._arvo_var.set(self._sovellus.arvo())
-        self._syote_kentta = ttk.Entry(master=self._root)
+        self.arvo_var = StringVar()
+        self.arvo_var.set(self.sovellus.arvo())
+        self.syote_kentta = ttk.Entry(master=self.root)
 
-        tulos_teksti = ttk.Label(textvariable=self._arvo_var)
+        tulos_teksti = ttk.Label(textvariable=self.arvo_var)
 
         summa_painike = ttk.Button(
-            master=self._root,
+            master=self.root,
             text="Summa",
-            command=lambda: self._suorita_komento(Komento.SUMMA)
+            command=lambda: self.suorita_komento(Komento.SUMMA)
         )
 
         erotus_painike = ttk.Button(
-            master=self._root,
+            master=self.root,
             text="Erotus",
-            command=lambda: self._suorita_komento(Komento.EROTUS)
+            command=lambda: self.suorita_komento(Komento.EROTUS)
         )
 
-        self._nollaus_painike = ttk.Button(
-            master=self._root,
+        self.nollaus_painike = ttk.Button(
+            master=self.root,
             text="Nollaus",
             state=constants.DISABLED,
-            command=lambda: self._suorita_komento(Komento.NOLLAUS)
+            command=lambda: self.suorita_komento(Komento.NOLLAUS)
         )
 
-        self._kumoa_painike = ttk.Button(
-            master=self._root,
+        self.kumoa_painike = ttk.Button(
+            master=self.root,
             text="Kumoa",
             state=constants.DISABLED,
-            command=lambda: self._suorita_komento(Komento.KUMOA)
+            command=lambda: self.suorita_komento(Komento.KUMOA)
         )
 
         tulos_teksti.grid(columnspan=4)
-        self._syote_kentta.grid(columnspan=4, sticky=(constants.E, constants.W))
+        self.syote_kentta.grid(columnspan=4, sticky=(constants.E, constants.W))
         summa_painike.grid(row=2, column=0)
         erotus_painike.grid(row=2, column=1)
-        self._nollaus_painike.grid(row=2, column=2)
-        self._kumoa_painike.grid(row=2, column=3)
+        self.nollaus_painike.grid(row=2, column=2)
+        self.kumoa_painike.grid(row=2, column=3)
 
-    def _suorita_komento(self, komento):
+
+
+    def suorita_komento(self, komento):
         arvo = 0
-
         try:
-            arvo = int(self._syote_kentta.get())
+            arvo = int(self.syote_kentta.get())
         except Exception:
             pass
+        komento_olio = self.komennot[komento]
+        komento_olio.suorita(arvo)
+        self.kumoa_painike["state"] = constants.NORMAL
 
-        if komento == Komento.SUMMA:
-            self._sovellus.plus(arvo)
-        elif komento == Komento.EROTUS:
-            self._sovellus.miinus(arvo)
-        elif komento == Komento.NOLLAUS:
-            self._sovellus.nollaa()
-        elif komento == Komento.KUMOA:
-            pass
-
-        self._kumoa_painike["state"] = constants.NORMAL
-
-        if self._sovellus.arvo() == 0:
-            self._nollaus_painike["state"] = constants.DISABLED
+        if self.sovellus.arvo() == 0:
+            self.nollaus_painike["state"] = constants.DISABLED
         else:
-            self._nollaus_painike["state"] = constants.NORMAL
+            self.nollaus_painike["state"] = constants.NORMAL
 
-        self._syote_kentta.delete(0, constants.END)
-        self._arvo_var.set(self._sovellus.arvo())
+        self.syote_kentta.delete(0, constants.END)
+        self.arvo_var.set(self.sovellus.arvo())
+
+class Summa:
+    def __init__(self, sovellus):
+        self.sovellus = sovellus
+
+    def suorita(self, arvo):
+        self.sovellus.plus(arvo)
+
+class Erotus:
+    def __init__(self, sovellus):
+        self.sovellus = sovellus
+
+    def suorita(self, arvo):
+        self.sovellus.miinus(arvo)
+
+class Nollaus:
+    def __init__(self, sovellus):
+        self.sovellus = sovellus
+
+    def suorita(self, arvo):
+        self.sovellus.nollaa()
+
+class Kumoa:
+    def __init__(self, sovellus):
+        self.sovellus = sovellus
+
+    def suorita(self, arvo):
+        self.sovellus.kumoa()
